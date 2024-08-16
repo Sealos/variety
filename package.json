@@ -32,11 +32,11 @@
     "url":  "https://github.com/variety/variety.git"
   },
   "scripts": {
-    "lint":        "./node_modules/.bin/eslint . .eslintrc.js --ignore-pattern '!.eslintrc.js'",
-    "lint:fix":    "./node_modules/.bin/eslint . .eslintrc.js --ignore-pattern '!.eslintrc.js' --fix",
-    "test":        "npm run lint && npm run test:docker",
-    "test:docker": "./spec/bin/test-on-docker",
-    "test:mocha":  "./node_modules/.bin/mocha --compilers js:babel-core/register --require babel-polyfill  --recursive --reporter spec --timeout 15000 spec"
+    "lint":        "eslint . .eslintrc.js --ignore-pattern '!.eslintrc.js'",
+    "lint:fix":    "eslint . .eslintrc.js --ignore-pattern '!.eslintrc.js' --fix",
+    "test":        "npm run test:docker",
+    "test:docker": "./test-on-docker",
+    "test:mocha":  "mocha --compilers js:babel-core/register --require babel-polyfill  --recursive --reporter spec --timeout 15000 spec"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",

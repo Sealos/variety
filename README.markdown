@@ -269,7 +269,7 @@ If you have Docker installed and don't want to test against your own MongoDB ins
 you can execute tests against dockerized MongoDB:
 
 ```
-MONGODB_VERSION=3.2 npm run test:docker
+MONGODB_VERSION=5 npm run test:docker
 ```
 The script downloads one of [official MongoDB images](https://hub.docker.com/_/mongo/) (based on your provided version),
 starts the database, executes test suite against it (inside the container) and stops the DB.

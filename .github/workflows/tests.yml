@@ -1,0 +1,22 @@
+name: Test
+on:
+  push:
+
+jobs:
+  build:
+    name: Test on Node.js ${{ matrix.node-version }} and MongoDB ${{ matrix.mongodb-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [16, 18]
+        mongodb-version: [5]
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v4
+
+      - name: Test
+        run: npm run test
+        env:
+          MONGODB_VERSION: ${{ matrix.mongodb-version }}
+          NODEJS_VERSION: ${{ matrix.node-version }}

@@ -1,0 +1,35 @@
+#! /usr/bin/env bash
+set -e
+
+# default versions if none in env
+MONGODB_VERSION=${MONGODB_VERSION:=5}
+NODEJS_VERSION=${NODEJS_VERSION:=16}
+
+VARIETY_VERSION=$(node -p -e "require('./package.json').version")
+
+VERSIONS_ID=$VARIETY_VERSION-mongodb$MONGODB_VERSION-nodejs$NODEJS_VERSION
+DOCKER_IMAGE="variety:$VERSIONS_ID"
+
+CONTAINER=${CONTAINER:=variety-test-$VERSIONS_ID}
+
+echo
+echo "****************************************"
+echo "* "
+echo "* Variety v$VARIETY_VERSION"
+echo "* "
+echo "* NodeJS  v$NODEJS_VERSION"
+echo "* MongoDB v$MONGODB_VERSION"
+echo "* "
+echo "* $(docker --version)"
+echo "* "
+echo "****************************************"
+echo
+
+echo "Building Docker image for Variety tests…"
+docker build \
+  --build-arg MONGODB_VERSION=$MONGODB_VERSION \
+  --build-arg NODEJS_VERSION=$NODEJS_VERSION \
+  --platform linux/amd64 \
+  --tag "$DOCKER_IMAGE" -f Dockerfile .
+
+docker run --rm --tty --name "$CONTAINER" "$DOCKER_IMAGE"
