@@ -27,6 +27,6 @@ COPY package.json /opt/variety/package.json
 COPY spec /opt/variety/spec
 COPY variety.js /opt/variety/variety.js
 COPY .babelrc /opt/variety/.babelrc
-COPY entrypoint /opt/variety/docker/entrypoint.sh
+COPY docker-entrypoint.sh /opt/variety/docker/entrypoint.sh
 
 ENTRYPOINT ["/opt/variety/docker/entrypoint.sh"]

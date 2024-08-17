@@ -6,7 +6,8 @@ import execute from './MongoShell';
 import JsonValidator from './JsonValidator';
 
 const mongodb_port = process.env.MONGODB_PORT || 27017;
-const default_url = `mongodb://localhost:${mongodb_port}/test?autoReconnect=true`;
+const mongodb_host = process.env.MONGODB_HOST || 'localhost';
+const default_url = `mongodb://${mongodb_host}:${mongodb_port}/test?autoReconnect=true`;
 
 export default class Tester {
   constructor(databaseName, collectionName) {
