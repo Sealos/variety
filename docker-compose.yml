@@ -1,0 +1,29 @@
+services:
+  mongodb:
+    image: mongo:${MONGODB_VERSION:-3.2}
+    container_name: mongodb
+    platform: linux/amd64
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: "mongo --eval 'db.adminCommand(\"ping\")' || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  test_runner:
+    platform: linux/amd64
+    build:
+      args:
+        NODEJS_VERSION: ${NODEJS_VERSION:-16}
+        MONGODB_VERSION: ${MONGODB_VERSION:-3.2}
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
